@@ -1,0 +1,29 @@
+.navbar{
+    background:rgba(255,255,255,0.3);
+    text-align:center;
+}
+.back{
+    color:white;
+    display:inline-block;
+    width:75px;
+    height:90%;
+    background:rgba(20,20,20,0.7);
+    border-radius:5px;
+    float:left;
+    margin-left:20px;
+    margin-top:10px;
+}
+h1{
+    display:inline-block;
+}
+.back:hover{
+    color:black;
+    display:inline-block;
+    width:75px;
+    height:90%;
+    background:rgba(235,235,235,0.7);
+    border-radius:5px;
+    float:left;
+    margin-left:20px;
+    margin-top:10px;
+}

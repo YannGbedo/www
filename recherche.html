@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/navbar.css">
+    <script src="js/jquery.js"></script>
+    <title>Recherche</title>
+    <script type="text/javascript">
+
+        function rechercheColor(sel){
+            var value = sel.options[sel.selectedIndex].text;
+            var test = document.getElementById('resultat');
+            test.innerHTML = "";
+            console.log('test');
+            var url="http://78.115.236.163/serie1.php?color="+value;
+            $.getJSON(url,function(result){
+                console.log(result);
+                $.each(result, function(i, field){
+                    var idcarte=field.idcarte;
+                    var couleur=field.couleur;
+                    var classe =field.classe;
+                    var nom = field.nom;
+                    var url = field.url;
+
+
+                    var colorback = '255-255-255';
+                    var colortext = "black";
+                    if(couleur === 'Rouge')
+                        colorback = '255-0-0';
+                    if(couleur === 'Bleu')
+                        colorback = '0-0-255';
+                    if(couleur === 'Vert')
+                        colorback = '0-255-0';
+                    if(couleur === 'Jaune')
+                        colorback = '255-255-0';
+                    if(couleur === 'Violet')
+                        colorback = '128-0-128';
+                    if(couleur === 'Noir') {
+                        colorback = '0-0-0';
+                        colortext ='white';
+                    }
+
+                    var background = colorback.split('-');
+
+                    var html = "<div class='carte' style='background-color:rgba("+ background[0]+", "+background[1]+","+background[2]+",0.3);'>";
+                    html += "<p style='color:"+colortext+";padding-top:5px;padding-left:25px;'>"+idcarte+" : " + classe +" ; "+ nom +"</p>";
+                    html += "</div>";
+
+                    test.innerHTML += html;
+                    });
+            });
+        }
+    </script>
+</head>
+<body>
+    <div data-role="header" data-theme="b" data-fullscreen="true"  class="navbar">
+        <a href="index.html">
+            <div class="back">
+                <h3>Retour</h3>
+            </div>
+        </a>
+        <h1>Recherche</h1>
+    </div>
+    <div class="menuRecherche">
+        <label >Couleur :</label>
+        <select id="couleur" onchange="rechercheColor(this)">
+            <option value="Noir">Noir</option>
+            <option value="Rouge">Rouge</option>
+            <option value="Vert">Vert</option>
+            <option value="Bleu">Bleu</option>
+            <option value="Violet">Violet</option>
+            <option value="Blanc">Blanc</option>
+        </select>
+
+    </div>
+    <div id="resultat">
+
+    </div>
+</body>
+</html>
